@@ -1,6 +1,10 @@
+from pathlib import Path
+
 from ultralytics import YOLO
 
-model = YOLO("../models/model.pt")
+MODEL_PATH = Path(__file__).resolve().parent.parent / "models" / "model.pt"
+
+model = YOLO(str(MODEL_PATH))
 
 
 def read_camels(images):
