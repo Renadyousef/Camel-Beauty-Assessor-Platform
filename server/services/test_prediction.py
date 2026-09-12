@@ -1,7 +1,12 @@
-from services.beauty_marks_prediction_service import read_camel
+from beauty_marks_prediction_service import read_camels
 
-image_path = "test.png"
+image_paths = [
+    "test.png",
+    "test2.png"
+]
 
-result = read_camel(image_path)
+results = read_camels(image_paths)
 
-print(result)
+for i, result in enumerate(results, start=1):
+    print(f"\nCamel {i}:")
+    print(result)
