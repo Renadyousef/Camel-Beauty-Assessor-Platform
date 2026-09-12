@@ -1,0 +1,62 @@
+
+========== RESULT ==========
+
+Winner: Team 1
+
+--- Team 1 ---
+Total score: 866.95
+
+Camel 1
+Camel confidence: 93.97%
+Beauty score: 563.07
+Traits:
+  Long-legs: 95.45%
+  Large_hump: 94.3%
+  High_withers: 88.8%
+  Long-neck: 78.14%
+  Large-lips: 68.42%
+  Large-nose: 65.16%
+  Wide_body: 51.67%
+  Large-head: 21.13%
+
+Camel 2
+Camel confidence: 95.5%
+Beauty score: 303.88
+Traits:
+  Long-neck: 96.74%
+  Large_hump: 82.27%
+  Large-lips: 79.54%
+  Large-nose: 32.88%
+  Wide_body: 6.8%
+  Long-legs: 5.65%
+  High_withers: 0.0%
+  Large-head: 0.0%
+
+--- Team 2 ---
+Total score: 535.96
+
+Camel 1
+Camel confidence: 94.66%
+Beauty score: 409.16
+Traits:
+  Long-neck: 96.3%
+  Long-legs: 83.2%
+  Large-lips: 81.68%
+  Large_hump: 68.51%
+  High_withers: 59.02%
+  Wide_body: 17.94%
+  Large-nose: 2.51%
+  Large-head: 0.0%
+
+Camel 2
+Camel confidence: 92.98%
+Beauty score: 126.8
+Traits:
+  Long-neck: 88.16%
+  Large-lips: 32.79%
+  Wide_body: 3.01%
+  Long-legs: 2.84%
+  High_withers: 0.0%
+  Large-head: 0.0%
+  Large-nose: 0.0%
+  Large_hump: 0.0%
