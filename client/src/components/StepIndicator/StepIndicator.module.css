@@ -1,0 +1,119 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  padding: 26px 20px 6px;
+}
+
+.track {
+  display: flex;
+  align-items: flex-start;
+  width: 560px;
+  max-width: 100%;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 130px;
+}
+
+.circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  flex: none;
+}
+
+.circleDone {
+  background: var(--color-gold-deep);
+  color: var(--color-surface);
+}
+
+.circleActive {
+  background: var(--color-gold);
+  color: var(--color-surface);
+}
+
+.circlePending {
+  background: var(--color-surface);
+  border: 2px solid var(--color-border-strong);
+  color: var(--color-text-faint);
+}
+
+.label {
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.labelOn {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.labelOff {
+  color: var(--color-text-faint);
+}
+
+.connector {
+  flex: 1;
+  height: 2px;
+  margin-top: 18px;
+  background: var(--color-border);
+}
+
+.connectorDone {
+  background: var(--color-gold-deep);
+}
+
+.connectorProcessing {
+  position: relative;
+  background: repeating-linear-gradient(90deg, var(--color-gold) 0 6px, transparent 6px 12px);
+}
+
+.processingTag {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-gold-tint);
+  color: var(--color-gold-deep);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Below this width, three fixed 130px steps no longer fit the viewport
+   (they were causing horizontal scroll on phones). Shrink the steps and
+   trim the connectors/labels so the whole track stays within view. */
+@media (max-width: 560px) {
+  .wrap {
+    padding: 22px 16px 6px;
+  }
+
+  .step {
+    width: 84px;
+  }
+
+  .circle {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
+
+  .label {
+    font-size: 12.5px;
+    margin-top: 6px;
+  }
+
+  .connector {
+    margin-top: 15px;
+  }
+}
