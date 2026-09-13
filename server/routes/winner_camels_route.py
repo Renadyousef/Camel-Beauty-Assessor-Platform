@@ -4,6 +4,7 @@ import tempfile
 import os
 
 from controllers.winner_camels_controller import winner_camels_batch
+from services.llm_report_service import generate_report
 # here assuming we wont save images after prediction thats why save temp in a file
 
 router = APIRouter()
@@ -67,6 +68,8 @@ async def winner_camels(
         )
 
         print("7. Controller finished")
+
+        result["llm_report"] = await generate_report(result)
 
         return result
 
