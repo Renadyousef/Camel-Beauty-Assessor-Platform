@@ -1,4 +1,5 @@
-from fastapi import APIRouter, UploadFile, File
+from fastapi import APIRouter, UploadFile, File, Form
+from typing import Optional
 import tempfile
 import os
 
@@ -10,7 +11,9 @@ router = APIRouter()
 @router.post("/winner-camels")
 async def winner_camels(
     team1_images: list[UploadFile] = File(...),
-    team2_images: list[UploadFile] = File(...)
+    team2_images: list[UploadFile] = File(...),
+    team1_name: Optional[str] = Form(None),
+    team2_name: Optional[str] = Form(None),
 ):
     print("1. Request received")
     print("Team 1:", len(team1_images))
@@ -58,7 +61,9 @@ async def winner_camels(
 
         result = winner_camels_batch(
             team1_paths,
-            team2_paths
+            team2_paths,
+            team1_name or "Team 1",
+            team2_name or "Team 2",
         )
 
         print("7. Controller finished")
