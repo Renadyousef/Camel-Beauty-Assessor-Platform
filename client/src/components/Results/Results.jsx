@@ -12,20 +12,27 @@ function scoreMargin(overall1, overall2) {
 }
 
 /**
- * `results` is the object returned by buildResults() (src/data/mockResults.js).
- * Everything here reads from that object rather than computing anything
- * itself, so pointing buildResults() at a real API response is the only
- * change needed later — this component doesn't change. `onNewComparison`
- * resets the app back to Setup — this is the only screen it makes sense
- * on, since there is no history/save to lose by leaving.
+ * `results` is produced by adaptApiResponse() (src/services/adaptApiResponse.js),
+ * in the same shape buildResults() (src/data/mockResults.js) originally
+ * defined. `onNewComparison` resets the app back to Setup — this is the
+ * only screen it makes sense on, since there is no history/save to lose by
+ * leaving.
  */
 export default function Results({ teams, images, results, onNewComparison }) {
   // The winner's reason is opened by default — it's the direct answer to
   // "why did this one win" — while the other side stays collapsed so the
   // page doesn't force everyone to read both explanations up front.
-  const [openReason, setOpenReason] = useState(results.team1.isWinner ? "team1" : "team2");
+  const [openReason, setOpenReason] = useState(
+    results.isTie ? null : results.team1.isWinner ? "team1" : "team2",
+  );
 
-  const winnerScore = results.team1.isWinner ? results.team1.overall : results.team2.overall;
+  // In a tie both teams share the same overall score, so either side's
+  // value is the shared score — this never singles out a winner.
+  const winnerScore = results.isTie
+    ? results.team1.overall
+    : results.team1.isWinner
+      ? results.team1.overall
+      : results.team2.overall;
 
   return (
     <div className={styles.content}>
@@ -36,12 +43,20 @@ export default function Results({ teams, images, results, onNewComparison }) {
         </h2>
 
         <div className={styles.winnerHero}>
-          <div className={styles.winnerTrophy}>
-            <TrophyIcon size={22} />
-          </div>
-          <p className={styles.winnerLine}>
-            الفائز المتوقع: <strong className={styles.winnerName}>{results.winnerName}</strong>
-          </p>
+          {results.isTie ? (
+            <p className={styles.winnerLine}>
+              النتيجة: <strong className={styles.winnerName}>{results.winnerName}</strong>
+            </p>
+          ) : (
+            <>
+              <div className={styles.winnerTrophy}>
+                <TrophyIcon size={22} />
+              </div>
+              <p className={styles.winnerLine}>
+                الفائز المتوقع: <strong className={styles.winnerName}>{results.winnerName}</strong>
+              </p>
+            </>
+          )}
           <div className={styles.winnerScore}>
             {winnerScore} <span className={styles.winnerScoreMax}>/ 100</span>
           </div>

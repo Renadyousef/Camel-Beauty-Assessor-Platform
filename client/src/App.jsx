@@ -6,7 +6,7 @@ import CompetitionSetup from "./components/CompetitionSetup/CompetitionSetup";
 import ImageUpload from "./components/ImageUpload/ImageUpload";
 import Processing from "./components/Processing/Processing";
 import Results from "./components/Results/Results";
-import { buildResults } from "./data/mockResults";
+import { adaptApiResponse } from "./services/adaptApiResponse";
 import { TEAM_SIZE } from "./config";
 import "./App.css";
 
@@ -54,8 +54,8 @@ export default function App() {
     setStep("processing");
   }
 
-  function handleProcessingComplete() {
-    setResults(buildResults({ team1Name: teams.team1.name, team2Name: teams.team2.name }));
+  function handleProcessingComplete(apiResult) {
+    setResults(adaptApiResponse(apiResult, { team1Name: teams.team1.name, team2Name: teams.team2.name }));
     setStep("results");
   }
 
@@ -96,7 +96,9 @@ export default function App() {
           />
         )}
 
-        {step === "processing" && <Processing onComplete={handleProcessingComplete} onError={handleProcessingError} />}
+        {step === "processing" && (
+          <Processing teams={teams} images={images} onComplete={handleProcessingComplete} onError={handleProcessingError} />
+        )}
 
         {step === "results" && results && (
           <Results teams={teams} images={images} results={results} onNewComparison={handleNewComparison} />
