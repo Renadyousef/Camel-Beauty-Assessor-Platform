@@ -1,0 +1,178 @@
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 34px 24px 80px;
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 28px 18px 60px;
+  }
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 38px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 10px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 130px;
+  margin: 18px auto 0;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: var(--color-gold);
+  opacity: 0.55;
+}
+
+.dividerDiamond {
+  width: 7px;
+  height: 7px;
+  background: var(--color-gold);
+  transform: rotate(45deg);
+  flex: none;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  width: 100%;
+  background: var(--color-surface);
+  border: 2px solid var(--team-color);
+  border-radius: var(--radius-card);
+  padding: 28px 24px 30px;
+  box-shadow: var(--shadow-card);
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--team-color);
+  flex: none;
+}
+
+.cardLabel {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--team-color);
+}
+
+.field {
+  margin-bottom: 22px;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.fieldLabel {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.required {
+  color: var(--color-error);
+}
+
+.optional {
+  color: var(--color-text-faint);
+  font-weight: 400;
+}
+
+.input {
+  width: 100%;
+  min-height: 54px;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  font-size: 16px;
+  color: var(--color-text);
+  font-family: inherit;
+}
+
+.input::placeholder {
+  color: var(--color-text-faint);
+}
+
+.input:focus-visible {
+  border-color: var(--team-color);
+}
+
+.vsRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vsRowLine {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border-strong);
+}
+
+.vsRowLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  letter-spacing: 0.02em;
+}
+
+.actions {
+  text-align: center;
+  margin-top: 38px;
+}
+
+.helper {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-top: 14px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 56px;
+}
+
+.footerTagline {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 14px auto 0;
+}
+
