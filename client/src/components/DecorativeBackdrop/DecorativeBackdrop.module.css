@@ -1,0 +1,138 @@
+/* Fixed, inert decorative background layer, cropped from the same
+   camel-background.png at its left (camel) and right (desert/mountain)
+   edges. Sits behind .app (which is position:relative + z-index:1, see
+   App.css) so every opaque surface in the interface — header, cards,
+   panels — naturally paints over it. The crop window (.left/.right width)
+   is sized close to the zoomed illustration's own width (background-size),
+   so most of the camel/mountain composition shows rather than a tightly
+   cropped fragment, and it's allowed to extend inward toward the page's
+   empty margin — any part that would reach under a card simply sits
+   behind it, since the layer is z-index 0. It scales down a notch at
+   narrower desktop widths to keep clearing that margin, and hides fully
+   on genuinely small (roughly sub-768px) screens, where there is no safe
+   margin left outside the content column at all. One shared size scale is
+   used on every screen (Setup, Upload, Processing, Results) so the artwork
+   reads as the same visual identity throughout — these values are the
+   Setup page's approved reference sizing, reused as-is everywhere else. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.left,
+.right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url("/camel-background.png");
+  background-repeat: no-repeat;
+  background-size: 2084px auto;
+  height: 1173px;
+  /* Boosts the PNG's own low fill-alpha at render time (see the filter
+     defined in DecorativeBackdrop.jsx) so the linework reads more clearly
+     without editing the source file. */
+  filter: url(#camel-alpha-boost);
+}
+
+.left {
+  left: 0;
+  width: 524px;
+  background-position: left center;
+}
+
+.right {
+  right: 0;
+  width: 613px;
+  background-position: right center;
+}
+
+/* Just below the very wide tier above: the Setup page's margin at this
+   range's narrow end (1560px) is smaller than at 1920px+, so this size is
+   capped to still leave a real gap before the form card there. */
+@media (max-width: 1919px) {
+  .left,
+  .right {
+    background-size: 1472px auto;
+    height: 828px;
+  }
+
+  .left {
+    width: 370px;
+  }
+
+  .right {
+    width: 433px;
+  }
+}
+
+/* Narrower desktop/laptop widths (down to the widest page content column,
+   1360px, plus its padding): scale the art down a notch so it keeps
+   clearing the page's margin as that margin shrinks with viewport width,
+   while still showing the camel/mountain compositions close to fully —
+   the crop window is sized to match the zoom level, not zoomed in far
+   past it. */
+@media (max-width: 1559px) {
+  .left,
+  .right {
+    background-size: 1142px auto;
+    height: 643px;
+  }
+
+  .left {
+    width: 287px;
+  }
+
+  .right {
+    width: 336px;
+  }
+}
+
+/* Small-laptop widths: shrink further, which by now has little to no
+   outside margin of its own. */
+@media (max-width: 1279px) {
+  .left,
+  .right {
+    background-size: 255px auto;
+    height: 144px;
+  }
+
+  .left {
+    width: 64px;
+  }
+
+  .right {
+    width: 74px;
+  }
+}
+
+/* Tablet-range widths: heavily simplified — a small, mostly-clipped sliver
+   right at the edge rather than a full illustration. */
+@media (max-width: 1023px) {
+  .left,
+  .right {
+    background-size: 159px auto;
+    height: 90px;
+  }
+
+  .left {
+    width: 40px;
+    left: -6px;
+  }
+
+  .right {
+    width: 46px;
+    right: -6px;
+  }
+}
+
+/* Below this width there is no safe margin left outside the page content
+   at all, so the art is hidden entirely rather than risk touching text or
+   forms. */
+@media (max-width: 767px) {
+  .backdrop {
+    display: none;
+  }
+}

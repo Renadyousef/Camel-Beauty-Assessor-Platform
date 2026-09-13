@@ -1,111 +1,114 @@
+/* ==========================================================================
+   منصة التحكيم الذكية للإبل — design tokens & base reset
+   Colors defined with oklch() for perceptual consistency. Token names are
+   the shared vocabulary the whole app is themed from — components should
+   always reference these variables rather than hardcoding hex/oklch values.
+   ========================================================================== */
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  /* neutrals — warm sand base, never pure white/black */
+  --color-background: oklch(97.3% 0.014 78);
+  --color-surface: oklch(99.2% 0.005 80);
+  --color-surface-alt: oklch(95% 0.016 76);
+  --color-border: oklch(89% 0.016 74);
+  --color-border-strong: oklch(80% 0.02 72);
+  --color-text: oklch(24% 0.02 55);
+  --color-text-muted: oklch(48% 0.018 58);
+  --color-text-faint: oklch(56% 0.016 58);
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* brand accent — used ONLY for interactive/primary elements */
+  --color-gold: oklch(60% 0.12 68);
+  --color-gold-deep: oklch(48% 0.105 64);
+  --color-gold-tint: oklch(93% 0.035 72);
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* team colors — fixed regardless of which team is entered where */
+  --color-team-one: oklch(42% 0.11 22); /* oxblood / burgundy */
+  --color-team-one-tint: oklch(93% 0.03 25);
+  --color-team-two: oklch(46% 0.06 210); /* petrol teal */
+  --color-team-two-tint: oklch(93% 0.018 210);
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  /* rare exception state (processing failure only — no pre-validation) */
+  --color-error: oklch(50% 0.15 30);
+  --color-error-tint: oklch(94% 0.035 28);
+  --color-success: oklch(55% 0.09 145);
+
+  /* shape */
+  --radius-card: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+
+  /* elevation — soft only, never heavy */
+  --shadow-sm: 0 1px 2px oklch(24% 0.02 55 / 0.05), 0 1px 1px oklch(24% 0.02 55 / 0.03);
+  --shadow-card: 0 1px 2px oklch(24% 0.02 55 / 0.05), 0 1px 1px oklch(24% 0.02 55 / 0.03);
+  --shadow-md: 0 6px 20px oklch(24% 0.02 55 / 0.07);
+  --shadow-lg: 0 10px 34px oklch(24% 0.02 55 / 0.08);
+
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+html,
+body,
+#root {
+  height: 100%;
 }
 
 body {
   margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+  line-height: 1.65;
 }
 
 h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
+h2,
+h3,
 p {
   margin: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+button,
+input {
+  font-family: inherit;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  color: var(--color-gold-deep);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Strong, visible focus ring everywhere — never rely on color/hover alone */
+:focus-visible {
+  outline: 3px solid var(--color-gold-deep);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

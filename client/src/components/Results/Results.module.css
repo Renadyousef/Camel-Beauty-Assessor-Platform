@@ -1,0 +1,220 @@
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 24px 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.finalResult {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.eyebrow {
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-gold-deep);
+  margin-bottom: 6px;
+}
+
+.sectionTitle {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 20px;
+}
+
+.sectionTitleCenter {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 22px;
+}
+
+.winnerHero {
+  text-align: center;
+  background: var(--color-gold-tint);
+  border-radius: var(--radius-card);
+  padding: 30px 24px 26px;
+  margin-bottom: 24px;
+}
+
+.winnerTrophy {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-gold-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.winnerLine {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 14px;
+}
+
+.winnerName {
+  font-size: 1.25em;
+  font-weight: 800;
+  color: var(--color-gold-deep);
+}
+
+.winnerScore {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--color-gold-deep);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.winnerScoreMax {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.winnerMargin {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.teamCards {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+@media (max-width: 640px) {
+  .winnerHero {
+    padding: 24px 18px 22px;
+  }
+
+  .winnerLine {
+    font-size: 17px;
+  }
+
+  .winnerScore {
+    font-size: 32px;
+  }
+
+  .sectionTitle,
+  .sectionTitleCenter {
+    font-size: 22px;
+  }
+}
+
+.disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.disclaimerText {
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.newComparison {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+/* --- reasons accordion ("أسباب النتيجة") --- */
+.reasonsSection {
+  margin: 0;
+}
+
+.reasonsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.reasonRow {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--team-color);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.reasonHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: none;
+  border: none;
+  padding: 20px 26px;
+  min-height: 64px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: start;
+}
+
+.reasonHeader:hover {
+  background: var(--color-surface-alt);
+}
+
+.reasonHeaderText {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.reasonArrow {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--team-color);
+  transition: transform 0.2s ease;
+}
+
+.reasonArrowOpen {
+  transform: rotate(180deg);
+}
+
+.reasonBody {
+  padding: 0 26px 24px;
+}
+
+.reasonBody p {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: var(--color-text);
+}
+
+@media (max-width: 640px) {
+  .reasonHeader {
+    padding: 18px 20px;
+    font-size: 16px;
+  }
+
+  .reasonBody {
+    padding: 0 20px 20px;
+  }
+}

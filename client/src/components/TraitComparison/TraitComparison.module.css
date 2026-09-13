@@ -1,0 +1,158 @@
+.section {
+  margin: 0;
+}
+
+.eyebrow {
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-gold-deep);
+  margin-bottom: 6px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 20px;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  padding: 8px 34px 12px;
+  overflow-x: auto;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 150px 1fr 1fr;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 4px;
+  border-bottom: 1px solid var(--color-border);
+  min-width: 480px;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.headerRow {
+  border-bottom: 2px solid var(--color-border-strong);
+}
+
+.headerTraitLabel {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--color-text-faint);
+}
+
+.headerTeam {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 15.5px;
+  font-weight: 700;
+}
+
+.headerDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.traitName {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.cell {
+  min-width: 0;
+}
+
+.valueRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.value {
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.valueWinner {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.winnerTag {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-gold-deep);
+  background: var(--color-gold-tint);
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--color-surface-alt);
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 5px;
+}
+
+/* Below this width the desktop table (fixed trait-label column + two score
+   columns, min-width 480px, horizontally scrollable) no longer fits without
+   side-scrolling. Each trait becomes its own self-contained block instead:
+   the trait name on its own full-width line, with both teams' name, score,
+   and bar side by side underneath so the comparison never requires
+   scrolling left/right. */
+@media (max-width: 640px) {
+  .card {
+    padding: 8px 18px 12px;
+    overflow-x: visible;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 14px;
+    row-gap: 6px;
+    min-width: 0;
+    padding: 16px 0;
+  }
+
+  /* Team names appear only in this header row (never repeated per trait),
+     so the header stays visible here instead of being hidden — only its
+     trait-label column is dropped, since that column doesn't exist in this
+     2-column card layout. */
+  .headerTraitLabel {
+    display: none;
+  }
+
+  .traitName {
+    grid-column: 1 / -1;
+    font-size: 16px;
+  }
+
+  .winnerTag {
+    font-size: 12px;
+    padding: 2px 8px;
+  }
+}

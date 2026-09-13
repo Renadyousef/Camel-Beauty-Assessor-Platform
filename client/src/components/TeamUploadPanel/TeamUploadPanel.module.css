@@ -1,0 +1,95 @@
+.panel {
+  background: oklch(99% 0.005 80 / 0.4);
+  border: 1px solid color-mix(in oklch, var(--team-color) 32%, transparent);
+  border-radius: var(--radius-card);
+  padding: 22px 24px 26px;
+}
+
+.head {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.headTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--team-color);
+  flex: none;
+}
+
+.label {
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--team-color);
+  letter-spacing: 0.02em;
+}
+
+.name {
+  font-size: 27px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.count {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--team-color);
+}
+
+.countIncomplete {
+  color: var(--color-text-muted);
+}
+
+.progressTrack {
+  width: 100%;
+  max-width: 280px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-surface-alt);
+  overflow: hidden;
+  margin: 0 auto 20px;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--team-color);
+  transition: width 0.2s ease;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .panel {
+    padding: 18px 16px 20px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 340px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

@@ -1,8 +1,10 @@
-from fastapi import APIRouter, UploadFile, File
+from fastapi import APIRouter, UploadFile, File, Form
+from typing import Optional
 import tempfile
 import os
 
 from controllers.winner_camels_controller import winner_camels_batch
+from services.llm_report_service import generate_report
 # here assuming we wont save images after prediction thats why save temp in a file
 
 router = APIRouter()
@@ -10,7 +12,9 @@ router = APIRouter()
 @router.post("/winner-camels")
 async def winner_camels(
     team1_images: list[UploadFile] = File(...),
-    team2_images: list[UploadFile] = File(...)
+    team2_images: list[UploadFile] = File(...),
+    team1_name: Optional[str] = Form(None),
+    team2_name: Optional[str] = Form(None),
 ):
     print("1. Request received")
     print("Team 1:", len(team1_images))
@@ -58,10 +62,14 @@ async def winner_camels(
 
         result = winner_camels_batch(
             team1_paths,
-            team2_paths
+            team2_paths,
+            team1_name or "Team 1",
+            team2_name or "Team 2",
         )
 
         print("7. Controller finished")
+
+        result["llm_report"] = await generate_report(result)
 
         return result
 
