@@ -4,7 +4,7 @@ import { AlertIcon } from "../../icons";
 import { TEAM_SIZE } from "../../config";
 import styles from "./ImageUpload.module.css";
 
-export default function ImageUpload({ teams, images, onSelect, onAnalyze, uploadError, onDismissError }) {
+export default function ImageUpload({ teams, images, onSelect, onSelectMany, onAnalyze, uploadError, onDismissError }) {
   const team1Count = images.team1.filter(Boolean).length;
   const team2Count = images.team2.filter(Boolean).length;
   const bothComplete = team1Count === TEAM_SIZE && team2Count === TEAM_SIZE;
@@ -36,6 +36,7 @@ export default function ImageUpload({ teams, images, onSelect, onAnalyze, upload
             colorVar="var(--color-team-one)"
             images={images.team1}
             onSelect={(index, file) => onSelect("team1", index, file)}
+            onSelectMany={(files) => onSelectMany("team1", files)}
             errorSlot={uploadError?.team === "team1" ? uploadError : undefined}
           />
 
@@ -45,6 +46,7 @@ export default function ImageUpload({ teams, images, onSelect, onAnalyze, upload
             colorVar="var(--color-team-two)"
             images={images.team2}
             onSelect={(index, file) => onSelect("team2", index, file)}
+            onSelectMany={(files) => onSelectMany("team2", files)}
             errorSlot={uploadError?.team === "team2" ? uploadError : undefined}
           />
         </div>

@@ -5,9 +5,14 @@ import styles from "./CompetitionSetup.module.css";
 
 const emptyTeam = { name: "", owner: "" };
 
-export default function CompetitionSetup({ onNext }) {
-  const [team1, setTeam1] = useState(emptyTeam);
-  const [team2, setTeam2] = useState(emptyTeam);
+/**
+ * `initialTeams` pre-fills the fields when the judge comes back to this screen
+ * from a later stage, so returning here means editing what they entered — not
+ * retyping it.
+ */
+export default function CompetitionSetup({ onNext, initialTeams }) {
+  const [team1, setTeam1] = useState(() => initialTeams?.team1 ?? emptyTeam);
+  const [team2, setTeam2] = useState(() => initialTeams?.team2 ?? emptyTeam);
 
   const canContinue = team1.name.trim().length > 0 && team2.name.trim().length > 0;
 

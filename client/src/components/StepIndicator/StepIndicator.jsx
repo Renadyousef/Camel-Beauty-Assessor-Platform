@@ -12,8 +12,12 @@ const STEPS = [
  * step. Pass `isProcessing` while on the Processing screen: steps 1-2 show
  * as done and the connector into step 3 shows a "قيد المعالجة" tag instead
  * of step 3 becoming active early.
+ *
+ * The track doubles as the app's navigation: a step the judge can go back
+ * (or forward) to becomes a button, and every other step stays inert — so a
+ * stage is never opened before the work it depends on exists.
  */
-export default function StepIndicator({ step, isProcessing = false }) {
+export default function StepIndicator({ step, isProcessing = false, canNavigateTo, onNavigate }) {
   function statusOf(n) {
     if (isProcessing) return n <= 2 ? "done" : "pending";
     if (n < step) return "done";
@@ -29,20 +33,37 @@ export default function StepIndicator({ step, isProcessing = false }) {
           const isLast = i === STEPS.length - 1;
           const showProcessingConnector = isProcessing && s.n === 2;
           const connectorDone = status === "done" && !showProcessingConnector;
+          const isNavigable = status !== "active" && Boolean(canNavigateTo?.(s.n)) && Boolean(onNavigate);
+
+          const stepBody = (
+            <>
+              <div
+                className={`${styles.circle} ${
+                  status === "done" ? styles.circleDone : status === "active" ? styles.circleActive : styles.circlePending
+                }`}
+                aria-current={status === "active" ? "step" : undefined}
+              >
+                {status === "done" ? <CheckIcon size={16} /> : s.n}
+              </div>
+              <div className={`${styles.label} ${status === "pending" ? styles.labelOff : styles.labelOn}`}>{s.label}</div>
+            </>
+          );
 
           return (
             <li key={s.n} style={{ display: "flex", flex: isLast ? "none" : 1, alignItems: "flex-start" }}>
-              <div className={styles.step}>
-                <div
-                  className={`${styles.circle} ${
-                    status === "done" ? styles.circleDone : status === "active" ? styles.circleActive : styles.circlePending
-                  }`}
-                  aria-current={status === "active" ? "step" : undefined}
+              {isNavigable ? (
+                <button
+                  type="button"
+                  className={`${styles.step} ${styles.stepButton}`}
+                  onClick={() => onNavigate(s.n)}
+                  aria-label={`الانتقال إلى ${s.label}`}
                 >
-                  {status === "done" ? <CheckIcon size={16} /> : s.n}
-                </div>
-                <div className={`${styles.label} ${status === "pending" ? styles.labelOff : styles.labelOn}`}>{s.label}</div>
-              </div>
+                  {stepBody}
+                </button>
+              ) : (
+                <div className={styles.step}>{stepBody}</div>
+              )}
+
               {!isLast && (
                 <div
                   className={`${styles.connector} ${connectorDone ? styles.connectorDone : ""} ${

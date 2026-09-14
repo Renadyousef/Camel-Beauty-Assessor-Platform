@@ -16,15 +16,32 @@
 // "Camel" itself), so a real API response drops in without renaming anything
 // here or in TraitComparison / TopCamels.
 export const TRAITS = [
-  { key: "withers", name: "الهامة" },
+  { key: "withers", name: "الغارب" },
   { key: "head", name: "الرأس" },
   { key: "lips", name: "المشافر" },
   { key: "nose", name: "الخشم" },
   { key: "hump", name: "السنام" },
-  { key: "legs", name: "الأرجل" },
+  { key: "legs", name: "السيقان" },
   { key: "neck", name: "الرقبة" },
-  { key: "body", name: "عرض الجسم" },
+  { key: "body", name: "الجنب" },
 ];
+// Bedouin-style descriptor for each trait, used to phrase a team's character
+// ("طابع المنقية") in its analysis report instead of repeating the numbers.
+export const TRAIT_DESCRIPTORS = {
+  withers: "مرتفعة الغارب",
+  head: "كبيرة الرأس",
+  lips: "متهدلة المشافر",
+  nose: "بارزة الخشم",
+  hump: "عالية السنام",
+  legs: "طويلة السيقان",
+  neck: "طويلة الرقبة",
+  body: "واسعة الجنب",
+};
+
+// A trait counts as "strong" at or above this percentage. Set deliberately
+// high: in a real mazayin the teams are competing camels, so only a clearly
+// dominant trait should be called a strength.
+export const STRONG_TRAIT_THRESHOLD = 45;
 
 // Mock per-trait scores (out of 100). Swap for the real model's output.
 const MOCK_TRAIT_SCORES = {

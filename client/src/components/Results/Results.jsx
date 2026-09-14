@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from "../Button/Button";
 import TeamResultCard from "../TeamResultCard/TeamResultCard";
-import TraitComparison from "../TraitComparison/TraitComparison";
 import TopCamels from "../TopCamels/TopCamels";
 import { ChevronDown, InfoIcon, PlusIcon, TrophyIcon } from "../../icons";
 import styles from "./Results.module.css";
@@ -65,21 +64,25 @@ export default function Results({ teams, images, results, onNewComparison }) {
 
         <div className={styles.teamCards}>
           <TeamResultCard
+            teamKey="team1"
             label="المنقية الأولى"
             name={results.team1.name}
             colorVar="var(--color-team-one)"
             tintVar="var(--color-team-one-tint)"
             overall={results.team1.overall}
             summary={results.summaries.team1}
+            report={results.reports?.team1}
           />
 
           <TeamResultCard
+            teamKey="team2"
             label="المنقية الثانية"
             name={results.team2.name}
             colorVar="var(--color-team-two)"
             tintVar="var(--color-team-two-tint)"
             overall={results.team2.overall}
             summary={results.summaries.team2}
+            report={results.reports?.team2}
           />
         </div>
 
@@ -91,10 +94,7 @@ export default function Results({ teams, images, results, onNewComparison }) {
         </div>
       </section>
 
-      {/* 2. TRAIT COMPARISON */}
-      <TraitComparison team1Name={teams.team1.name} team2Name={teams.team2.name} traits={results.traits} />
-
-      {/* 3. TOP 3 CAMELS */}
+      {/* 2. TOP 3 CAMELS */}
       <TopCamels
         team1Name={teams.team1.name}
         team2Name={teams.team2.name}
@@ -102,7 +102,7 @@ export default function Results({ teams, images, results, onNewComparison }) {
         images={images}
       />
 
-      {/* 4. WHY EACH TEAM SCORED THE WAY IT DID */}
+      {/* 3. WHY EACH TEAM SCORED THE WAY IT DID */}
       <section className={styles.reasonsSection} aria-labelledby="reasons-title">
         <div className={styles.eyebrow}>الأسباب</div>
         <h2 id="reasons-title" className={styles.sectionTitle}>

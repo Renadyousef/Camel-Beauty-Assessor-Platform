@@ -16,7 +16,7 @@ export default function AppHeader() {
             <img className={styles.logo} src="/logo.png" alt="" />
           </span>
           <div>
-            <div className={styles.title}>منصة المزايين</div>
+            <div className={styles.title}>محكم مزاين الإبل</div>
             <div className={styles.subtitle}>تحليل ومقارنة الإبل بالذكاء الاصطناعي</div>
           </div>
         </div>

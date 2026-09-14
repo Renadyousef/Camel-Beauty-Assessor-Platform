@@ -93,3 +93,43 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+/* --- bulk ("اختيار عدة صور") picker, in the panel head --- */
+
+.bulkButton {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1.5px solid color-mix(in oklch, var(--team-color) 45%, transparent);
+  background: var(--color-surface);
+  color: var(--team-color);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.bulkButton:hover:not(:disabled) {
+  background: color-mix(in oklch, var(--team-color) 8%, var(--color-surface));
+}
+
+.bulkButton:disabled {
+  cursor: default;
+  opacity: 0.55;
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+
+.bulkNote {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.hiddenInput {
+  display: none;
+}
