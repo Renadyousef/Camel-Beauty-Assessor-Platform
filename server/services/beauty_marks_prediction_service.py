@@ -7,7 +7,7 @@ from ultralytics import YOLO
 MODEL_PATH = (
     Path(__file__).resolve().parent.parent
     / "models"
-    / "model_gray_chosen.pt"
+    / "model_rgb.pt"
 )
 
 model = YOLO(str(MODEL_PATH))
@@ -15,27 +15,22 @@ model = YOLO(str(MODEL_PATH))
 
 def preprocess_image(image):
     """
-    Apply the preprocessing required by the grayscale model.
+    Apply the preprocessing required by the RGB model.
 
     Original image
         -> fix phone-photo rotation
-        -> grayscale
         -> RGB format for YOLO
     """
 
-    # If a file path was passed
     if isinstance(image, (str, Path)):
         img = Image.open(image)
-
-    # If a file-like object was passed
     else:
         img = Image.open(image)
 
     img = ImageOps.exif_transpose(img)
 
-    # Data scientist's preprocessing:
-    # grayscale (L) -> RGB
-    img = img.convert("L").convert("RGB")
+    # RGB model: keep the original color information
+    img = img.convert("RGB")
 
     return img
 
