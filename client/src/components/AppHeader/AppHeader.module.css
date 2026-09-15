@@ -9,6 +9,25 @@
   z-index: 1;
 }
 
+.homeButton {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-gold-deep);
+  flex: none;
+  transition: background-color 0.15s ease;
+}
+
+.homeButton:hover {
+  background: var(--color-gold-tint);
+}
+
 .divider {
   display: flex;
   align-items: center;

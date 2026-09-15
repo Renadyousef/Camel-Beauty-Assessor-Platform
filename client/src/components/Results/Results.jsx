@@ -5,6 +5,19 @@ import TopCamels from "../TopCamels/TopCamels";
 import { ChevronDown, InfoIcon, PlusIcon, TrophyIcon } from "../../icons";
 import styles from "./Results.module.css";
 
+// On this screen only, colour follows the outcome rather than which team was
+// entered first: petrol teal for a win (and for both sides of a tie, where
+// neither lost), oxblood for the lower score. Teal reads as a cold colour
+// against the warm oxblood, so the two are told apart at a glance — gold sits
+// too close to oxblood to carry that contrast. The same pair is reused by the
+// top-3 lists below so one team reads as one colour down the whole page.
+function outcomeColors(isWinner, isTie) {
+  if (isTie || isWinner) {
+    return { colorVar: "var(--color-team-two)", tintVar: "var(--color-team-two-tint)" };
+  }
+  return { colorVar: "var(--color-team-one)", tintVar: "var(--color-team-one-tint)" };
+}
+
 function scoreMargin(overall1, overall2) {
   const diff = Math.round(Math.abs(overall1 - overall2) * 10) / 10;
   return diff === 0 ? "بنتيجة متعادلة" : `بفارق ${diff} نقاط`;
@@ -32,6 +45,9 @@ export default function Results({ teams, images, results, onNewComparison }) {
     : results.team1.isWinner
       ? results.team1.overall
       : results.team2.overall;
+
+  const team1Colors = outcomeColors(results.team1.isWinner, results.isTie);
+  const team2Colors = outcomeColors(results.team2.isWinner, results.isTie);
 
   return (
     <div className={styles.content}>
@@ -67,8 +83,8 @@ export default function Results({ teams, images, results, onNewComparison }) {
             teamKey="team1"
             label="المنقية الأولى"
             name={results.team1.name}
-            colorVar="var(--color-team-one)"
-            tintVar="var(--color-team-one-tint)"
+            colorVar={team1Colors.colorVar}
+            tintVar={team1Colors.tintVar}
             overall={results.team1.overall}
             summary={results.summaries.team1}
             report={results.reports?.team1}
@@ -78,8 +94,8 @@ export default function Results({ teams, images, results, onNewComparison }) {
             teamKey="team2"
             label="المنقية الثانية"
             name={results.team2.name}
-            colorVar="var(--color-team-two)"
-            tintVar="var(--color-team-two-tint)"
+            colorVar={team2Colors.colorVar}
+            tintVar={team2Colors.tintVar}
             overall={results.team2.overall}
             summary={results.summaries.team2}
             report={results.reports?.team2}
@@ -100,6 +116,8 @@ export default function Results({ teams, images, results, onNewComparison }) {
         team2Name={teams.team2.name}
         topCamels={results.topCamels}
         images={images}
+        team1Colors={team1Colors}
+        team2Colors={team2Colors}
       />
 
       {/* 3. WHY EACH TEAM SCORED THE WAY IT DID */}

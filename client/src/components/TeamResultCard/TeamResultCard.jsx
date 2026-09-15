@@ -23,18 +23,20 @@ export default function TeamResultCard({ teamKey, label, name, colorVar, tintVar
 
   return (
     <div className={styles.card} style={{ "--team-color": colorVar, "--team-tint": tintVar }}>
-      <div className={styles.label}>{label}</div>
+      <div className={styles.cardTop}>
+        <div className={styles.label}>{label}</div>
 
-      <div className={styles.nameRow}>
-        <span className={styles.dot} />
-        <span className={styles.name}>{name}</span>
+        <div className={styles.nameRow}>
+          <span className={styles.dot} />
+          <span className={styles.name}>{name}</span>
+        </div>
+
+        <div className={styles.score}>
+          {overall} <span className={styles.scoreMax}>/ 100</span>
+        </div>
+
+        <p className={styles.summary}>{summary}</p>
       </div>
-
-      <div className={styles.score}>
-        {overall} <span className={styles.scoreMax}>/ 100</span>
-      </div>
-
-      <p className={styles.summary}>{summary}</p>
 
       {report && (
         <>
@@ -89,8 +91,7 @@ function TeamReport({ report }) {
       <div className={styles.traits}>
         {traits.map((trait) => {
           const isUndetected = trait.value === 0;
-          const width = maxValue > 0 ? Math.max((trait.value / maxValue) * 100, 3) : 0;
-
+          const width = Math.max(trait.value, isUndetected ? 0 : 2);
           return (
             <div className={styles.traitRow} key={trait.key}>
               <span className={`${styles.traitName} ${isUndetected ? styles.traitNameMuted : ""}`}>{trait.name}</span>

@@ -4,6 +4,7 @@ import DecorativeBackdrop from "./components/DecorativeBackdrop/DecorativeBackdr
 import StepIndicator from "./components/StepIndicator/StepIndicator";
 import CompetitionSetup from "./components/CompetitionSetup/CompetitionSetup";
 import ImageUpload from "./components/ImageUpload/ImageUpload";
+import Landing from "./components/Landing/Landing";
 import Processing from "./components/Processing/Processing";
 import Results from "./components/Results/Results";
 import { adaptApiResponse } from "./services/adaptApiResponse";
@@ -22,8 +23,8 @@ function revokeTeamImages(imageArray) {
 }
 
 export default function App() {
-  // "setup" | "upload" | "processing" | "results"
-  const [step, setStep] = useState("setup");
+  // "landing" | "setup" | "upload" | "processing" | "results"
+  const [step, setStep] = useState("landing");
   const [teams, setTeams] = useState({ team1: null, team2: null });
   const [images, setImages] = useState({ team1: emptyTeamImages(), team2: emptyTeamImages() });
   const [uploadError, setUploadError] = useState(null);
@@ -45,6 +46,9 @@ export default function App() {
         return;
       }
 
+      // A saved session resumes exactly where the judge left off — the
+      // landing screen is an introduction, not somewhere to send them back to
+      // with work already in progress.
       if (saved) {
         setStep(saved.step);
         setTeams(saved.teams);
@@ -138,6 +142,14 @@ export default function App() {
     setStep("upload");
   }
 
+  function handleStart() {
+    setStep("setup");
+  }
+
+  function handleGoHome() {
+    setStep("landing");
+  }
+
   function handleNewComparison() {
     revokeTeamImages(images.team1);
     revokeTeamImages(images.team2);
@@ -145,6 +157,8 @@ export default function App() {
     setTeams({ team1: null, team2: null });
     setUploadError(null);
     setResults(null);
+    // Back to Setup rather than the landing screen: the judge asked for a new
+    // comparison, so the next thing they need is the first input.
     setStep("setup");
     clearSession();
   }
@@ -153,7 +167,7 @@ export default function App() {
   // screen needs team names, and the results screen needs a result that still
   // matches the current photos.
   function canNavigateTo(stepNumber) {
-    if (step === "processing") return false;
+    if (step === "processing" || step === "landing") return false;
     if (stepNumber === 1) return true;
     if (stepNumber === 2) return Boolean(teams.team1 && teams.team2);
     return Boolean(results);
@@ -165,21 +179,27 @@ export default function App() {
   }
 
   const stepNumber = step === "setup" ? 1 : step === "upload" ? 2 : step === "processing" ? 2 : 3;
+  const isLanding = step === "landing";
 
   if (isRestoring) return null;
 
   return (
     <div className="app">
       <DecorativeBackdrop />
-      <AppHeader />
-      <StepIndicator
-        step={stepNumber}
-        isProcessing={step === "processing"}
-        canNavigateTo={canNavigateTo}
-        onNavigate={handleNavigate}
-      />
+      <AppHeader onGoHome={isLanding ? undefined : handleGoHome} />
+
+      {!isLanding && (
+        <StepIndicator
+          step={stepNumber}
+          isProcessing={step === "processing"}
+          canNavigateTo={canNavigateTo}
+          onNavigate={handleNavigate}
+        />
+      )}
 
       <main className="main">
+        {isLanding && <Landing onStart={handleStart} />}
+
         {step === "setup" && <CompetitionSetup onNext={handleSetupNext} initialTeams={teams} />}
 
         {step === "upload" && (

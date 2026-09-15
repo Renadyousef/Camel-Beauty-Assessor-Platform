@@ -18,6 +18,36 @@
   width: 130px;
 }
 
+.stepButton {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.stepButton:hover .circle {
+  filter: brightness(1.08);
+}
+
+.stepButton:hover .labelOn,
+.stepButton:hover .labelOff {
+  color: var(--color-gold-deep);
+}
+
+/* index.css draws a global focus ring on every focusable element, which on a
+   whole step (circle + label) reads as a box around the circle. Scope it to
+   the circle itself so the ring stays visible but follows its shape. */
+.stepButton:focus-visible {
+  outline: none;
+}
+
+.stepButton:focus-visible .circle {
+  outline: 3px solid var(--color-gold-deep);
+  outline-offset: 2px;
+}
 .circle {
   width: 36px;
   height: 36px;

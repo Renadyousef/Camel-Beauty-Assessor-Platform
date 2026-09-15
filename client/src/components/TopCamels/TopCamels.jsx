@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CamelThumb } from "../../icons";
 import styles from "./TopCamels.module.css";
 
-export default function TopCamels({ team1Name, team2Name, topCamels, images }) {
+export default function TopCamels({ team1Name, team2Name, topCamels, images, team1Colors, team2Colors }) {
   // Rows with a photo can be clicked to see it larger — the thumbnail alone
   // is too small to really look at the camel, which matters more here than
   // an extra click target would cost.
@@ -27,16 +27,16 @@ export default function TopCamels({ team1Name, team2Name, topCamels, images }) {
       <div className={styles.cols}>
         <TeamTopList
           teamName={team1Name}
-          colorVar="var(--color-team-one)"
-          tintVar="var(--color-team-one-tint)"
+          colorVar={team1Colors.colorVar}
+          tintVar={team1Colors.tintVar}
           entries={topCamels.team1}
           images={images.team1}
           onPreview={setPreview}
         />
         <TeamTopList
           teamName={team2Name}
-          colorVar="var(--color-team-two)"
-          tintVar="var(--color-team-two-tint)"
+          colorVar={team2Colors.colorVar}
+          tintVar={team2Colors.tintVar}
           entries={topCamels.team2}
           images={images.team2}
           onPreview={setPreview}
